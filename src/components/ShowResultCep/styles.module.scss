@@ -1,0 +1,21 @@
+.container{
+  padding: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
+  table{
+    thead th{
+      border: 0;
+      padding: 10px;
+      background: #00668C;
+      color: #fff;
+    }
+    tr th{
+      color: #fff;
+      padding: 10px;
+
+    }
+  }
+}

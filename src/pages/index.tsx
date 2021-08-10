@@ -27,17 +27,27 @@ export default function Home() {
       return;
     }
 
-    const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+    try {
+      const { data } = await axios.get(`https://viacep.com.br/ws/${cep}/json/`);
+      if(data.erro){
+        alert('Digite um CEP válido!');
+        return
+      }
+      setDataCep({
+        cep: data.cep,
+        bairro: data.bairro,
+        ddd: data.ddd,
+        uf: data.uf,
+        complemento: data.complemento,
+        localidade: data.localidade,
+        logradouro: data.logradouro
+      });
 
-    setDataCep({
-      cep: data.cep,
-      bairro: data.bairro,
-      ddd: data.ddd,
-      uf: data.uf,
-      complemento: data.complemento,
-      localidade: data.localidade,
-      logradouro: data.logradouro
-    });
+    } catch (err) {
+      alert(err)
+    }
+
+
 
   }
   return (
@@ -53,6 +63,7 @@ export default function Home() {
               value={cep}
               type="text"
               name="cep"
+              maxLength={8}
             />
 
             <button
@@ -64,7 +75,7 @@ export default function Home() {
           </form>
           {
             dataCep
-              && <ShowResultCep data={dataCep} />
+            && <ShowResultCep data={dataCep} />
           }
         </div>
         <div>
